@@ -10,6 +10,7 @@ public class Othello2Application {
 		SpringApplication.run(Othello2Application.class, args);
         System.out.println("phu2 test git");
 		System.out.println("phutest git 2");
+		System.out.println("kaka");
 	}
 
 }
