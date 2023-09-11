@@ -30,9 +30,8 @@ public class Controller {
     @GetMapping("/inside-board")
     @Operation(summary = "Kiểm tra xem quân cờ có nằm trong bàn cờ không")
     public Boolean insideBoardCheck(@RequestParam @NonNull Integer x,
-                                    @RequestParam @NonNull Integer y,
-                                    @RequestParam @NonNull Integer size){
-        return insideBoardCheckService.check(x, y , size);
+                                    @RequestParam @NonNull Integer y){
+        return insideBoardCheckService.check(x, y);
     }
 
     @Operation(summary = "Lấy tất cả quân cờ của người chơi hiện tại")
