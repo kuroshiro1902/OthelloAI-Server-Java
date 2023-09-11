@@ -13,7 +13,7 @@ public class GetDiscService {
         List<Cell> result = new ArrayList<>();
         for ( Cell[] row : cells ){
             for (Cell cell : row){
-                if (player.equals(cell.getDisc())){
+                if (player == cell.getDisc()){
                     result.add(cell);
                 }
             }
