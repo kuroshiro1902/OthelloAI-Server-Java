@@ -16,6 +16,6 @@ public enum Direction {
     BOTTOM(1, 0),
     BOTTOM_RIGHT(1, 1);
 
-    private final int dx;
-    private final int dy;
+    private final int x;
+    private final int y;
 }
