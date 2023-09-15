@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/othello")
 @AllArgsConstructor
+@CrossOrigin
 public class Controller {
 
     private final InitializeChessBoardService initializeChessBoardService;
