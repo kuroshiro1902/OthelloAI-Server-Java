@@ -7,8 +7,10 @@ import com.example.Othello2.services.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Priority;
 import java.util.List;
 
 @RestController
@@ -25,7 +27,9 @@ public class Controller {
 
     @PostMapping("/dynamic-evaluation")
     @Operation(summary = "Đánh giá lợi thế")
-    public Double dynamicEvaluation(@RequestBody Cell[][] cells,@RequestParam String player,@RequestBody List<Move> validMovesForPlayer){
+    public Double dynamicEvaluation(@RequestBody Cell[][] cells,
+                                    @RequestBody String player,
+                                    @RequestBody List<Move> validMovesForPlayer){
         return dynamicEvaluationService.dynamicEvaluation(cells, Player.valueOf(player), validMovesForPlayer);
     }
 
@@ -35,23 +39,16 @@ public class Controller {
         return initializeChessBoardService.initialize();
     }
 
-//    @Operation(summary = "Lấy tất cả quân cờ của người chơi hiện tại")
-//    @PostMapping("/all-discs-of-player")
-//    public List<Cell> getAllDiscsOfThisPlayer(@RequestBody Cell[][] cells,
-//                                              @RequestParam @NonNull String player){
-//        return getDiscService.getAllDiscsOfThisPlayer(cells, Player.valueOf(player));
-//    }
-
     @PostMapping("/is-valid-move")
-    public Move isValidMove(@RequestBody Cell[][] cells,
-                            @RequestParam int row,
-                            @RequestParam int col,
-                            @RequestParam String player){
+    public Move isValidMove(@RequestBody int row,
+                            @RequestBody int col,
+                            @RequestBody String player,
+                            @RequestBody Cell[][] cells){
         return isValidMoveService.isValidMove(cells, row, col, Player.valueOf(player));
     }
 
     @PostMapping("/find-valid-move")
-    List<Move> findValidMoves(@RequestBody Cell[][] cells, @RequestParam String player){
+    List<Move> findValidMoves (@RequestBody String player, @RequestBody Cell[][] cells){
         return findValidMoveService.findValidMoves(cells, Player.valueOf(player));
     }
 
