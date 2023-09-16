@@ -3,6 +3,9 @@ package com.example.Othello2.controllers;
 import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
 import com.example.Othello2.models.Move;
+import com.example.Othello2.models.request.DynamicEvaluationRequest;
+import com.example.Othello2.models.request.FindValidMoveRequest;
+import com.example.Othello2.models.request.IsValidMoveRequest;
 import com.example.Othello2.services.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -27,10 +30,9 @@ public class Controller {
 
     @PostMapping("/dynamic-evaluation")
     @Operation(summary = "Đánh giá lợi thế")
-    public Double dynamicEvaluation(@RequestBody Cell[][] cells,
-                                    @RequestBody String player,
-                                    @RequestBody List<Move> validMovesForPlayer){
-        return dynamicEvaluationService.dynamicEvaluation(cells, Player.valueOf(player), validMovesForPlayer);
+    public Double dynamicEvaluation(@RequestBody DynamicEvaluationRequest request){
+        return dynamicEvaluationService.dynamicEvaluation(request.getCells(),
+                Player.valueOf(request.getPlayer()), request.getValidMovesForPlayer());
     }
 
     @GetMapping("/initialize")
@@ -40,16 +42,14 @@ public class Controller {
     }
 
     @PostMapping("/is-valid-move")
-    public Move isValidMove(@RequestBody int row,
-                            @RequestBody int col,
-                            @RequestBody String player,
-                            @RequestBody Cell[][] cells){
-        return isValidMoveService.isValidMove(cells, row, col, Player.valueOf(player));
+    public Move isValidMove(@RequestBody IsValidMoveRequest request){
+        return isValidMoveService.isValidMove( request.getCells(),
+                request.getRow(), request.getCol(), Player.valueOf(request.getPlayer()));
     }
 
     @PostMapping("/find-valid-move")
-    List<Move> findValidMoves (@RequestBody String player, @RequestBody Cell[][] cells){
-        return findValidMoveService.findValidMoves(cells, Player.valueOf(player));
+    List<Move> findValidMoves (@RequestBody FindValidMoveRequest request){
+        return findValidMoveService.findValidMoves(request.getCells(), Player.valueOf(request.getPlayer()));
     }
 
 
