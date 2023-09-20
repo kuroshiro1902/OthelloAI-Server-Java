@@ -17,8 +17,8 @@ import java.util.List;
 public class Controller {
 
     private final InitializeChessBoardService initializeChessBoardService;
-    private final GetDiscService getDiscService;
-    private final IsValidMoveService isValidMoveService;
+    private final GetPieceService getPieceService;
+    private final IsValidMovesService isValidMovesService;
     private final DynamicEvaluationService dynamicEvaluationService;
     private final FindValidMoveService findValidMoveService;
 
@@ -46,7 +46,7 @@ public class Controller {
                             @RequestParam int row,
                             @RequestParam int col,
                             @RequestParam String player){
-        return isValidMoveService.isValidMove(cells, row, col, Player.valueOf(player));
+        return isValidMovesService.isValidMoves(cells, row, col, Player.valueOf(player));
     }
 
     @PostMapping("/find-valid-move")
