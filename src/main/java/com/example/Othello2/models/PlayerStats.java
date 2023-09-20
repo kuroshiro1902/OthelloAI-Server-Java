@@ -11,8 +11,8 @@ import java.util.List;
 @Setter
 public class PlayerStats {
     private Player player;
-    private List<Cell> discs;
-    private int edgeDiscsAmount;
-    private int cornerDiscsAmount;
+    private List<Cell> pieces;
+    private int edgePiecesAmount;
+    private int cornerPiecesAmount;
     private int validMovesAmount;
 }
