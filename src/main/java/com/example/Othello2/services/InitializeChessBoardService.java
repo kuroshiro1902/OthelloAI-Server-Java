@@ -17,10 +17,10 @@ public class InitializeChessBoardService {
             }
         }
 
-        cells[centerIndex][centerIndex].setDisc(Player.WHITE);
-        cells[centerIndex][centerIndex + 1].setDisc(Player.BLACK);
-        cells[centerIndex + 1][centerIndex].setDisc(Player.BLACK);
-        cells[centerIndex + 1][centerIndex + 1].setDisc(Player.WHITE);
+        cells[centerIndex][centerIndex].setPiece(Player.WHITE);
+        cells[centerIndex][centerIndex + 1].setPiece(Player.BLACK);
+        cells[centerIndex + 1][centerIndex].setPiece(Player.BLACK);
+        cells[centerIndex + 1][centerIndex + 1].setPiece(Player.WHITE);
 
         return cells;
     }

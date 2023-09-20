@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.Othello2.services.CountCornerDiscOfPlayer.countCornerDiscsOfPlayer;
-import static com.example.Othello2.services.CountEdgeDiscOfPlayerService.countEdgeDiscsOfPlayer;
+import static com.example.Othello2.services.CountCornerPieceOfPlayer.countCornerPiecesOfPlayer;
+import static com.example.Othello2.services.CountEdgePieceOfPlayerService.countEdgePiecesOfPlayer;
 
 @AllArgsConstructor
 @Service
@@ -18,24 +18,24 @@ public class DynamicEvaluationService {
 
     private final FindValidMoveService findValidMoveService;
     private final EvaluatePlayerService evaluatePlayerService;
-    private final GetDiscService getDiscService;
+    private final GetPieceService getPieceService;
 
     public double dynamicEvaluation(Cell[][] cells, Player player, List<Move> validMovesForPlayer) {
         System.out.println(validMovesForPlayer);
 
         PlayerStats currentPlayer = new PlayerStats(player,
-                getDiscService.getAllDiscsOfThisPlayer(cells, player),
-                countEdgeDiscsOfPlayer(cells, player),
-                countCornerDiscsOfPlayer(cells, player),
+                getPieceService.getAllPiecesOfThisPlayer(cells, player),
+                countEdgePiecesOfPlayer(cells, player),
+                countCornerPiecesOfPlayer(cells, player),
                 validMovesForPlayer != null ? validMovesForPlayer.size()
                         : findValidMoveService.findValidMoves(cells, player).size());
 
         Player opponent = player == Player.BLACK ? Player.WHITE : Player.BLACK;
 
         PlayerStats opponentPlayer = new PlayerStats(opponent,
-                getDiscService.getAllDiscsOfThisPlayer(cells, opponent),
-                countEdgeDiscsOfPlayer(cells, opponent),
-                countCornerDiscsOfPlayer(cells, opponent),
+                getPieceService.getAllPiecesOfThisPlayer(cells, opponent),
+                countEdgePiecesOfPlayer(cells, opponent),
+                countCornerPiecesOfPlayer(cells, opponent),
                 findValidMoveService.findValidMoves(cells, opponent).size());
 
         System.out.println(currentPlayer);
