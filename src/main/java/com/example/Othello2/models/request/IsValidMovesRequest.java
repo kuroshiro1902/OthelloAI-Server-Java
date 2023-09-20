@@ -6,14 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties
-public class IsValidMoveRequest {
+public class IsValidMovesRequest {
     private Integer row;
     private Integer col;
     private String player;
