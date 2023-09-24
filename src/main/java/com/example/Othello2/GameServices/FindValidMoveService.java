@@ -1,4 +1,4 @@
-package com.example.Othello2.services;
+package com.example.Othello2.GameServices;
 
 import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;

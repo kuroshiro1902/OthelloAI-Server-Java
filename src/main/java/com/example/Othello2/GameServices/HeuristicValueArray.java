@@ -1,7 +1,5 @@
-package com.example.Othello2.services;
+package com.example.Othello2.GameServices;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 @Service

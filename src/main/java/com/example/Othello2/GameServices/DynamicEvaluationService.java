@@ -1,4 +1,4 @@
-package com.example.Othello2.services;
+package com.example.Othello2.GameServices;
 
 import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.Othello2.services.CountCornerPieceOfPlayer.countCornerPiecesOfPlayer;
-import static com.example.Othello2.services.CountEdgePieceOfPlayerService.countEdgePiecesOfPlayer;
+import static com.example.Othello2.GameServices.CountCornerPieceOfPlayer.countCornerPiecesOfPlayer;
+import static com.example.Othello2.GameServices.CountEdgePieceOfPlayerService.countEdgePiecesOfPlayer;
 
 @AllArgsConstructor
 @Service
