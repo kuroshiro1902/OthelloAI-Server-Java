@@ -1,4 +1,4 @@
-package com.example.Othello2.services;
+package com.example.Othello2.GameServices;
 
 import org.springframework.stereotype.Service;
 

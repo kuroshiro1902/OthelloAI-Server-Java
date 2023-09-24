@@ -3,10 +3,9 @@ package com.example.Othello2.controllers;
 import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
 import com.example.Othello2.models.Move;
-import com.example.Othello2.services.*;
+import com.example.Othello2.GameServices.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/othello")
 @AllArgsConstructor
+@CrossOrigin
 public class Controller {
 
     private final InitializeChessBoardService initializeChessBoardService;
