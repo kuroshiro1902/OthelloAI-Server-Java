@@ -26,18 +26,18 @@ public class IsValidMovesService {
             return null;
         }
 
+        // những ô cờ bị lật
+        List<Cell> flipCells = new ArrayList<>();
+
         // duyệt qua các ô lân cận
         for (Direction direction : Direction.values()) {
             int adjacentX = row + direction.getX();
             int adjacentY = col + direction.getY();
 
             // nếu tọa độ x, y nằm trong bàn cờ
-            if (insideBoardCheckService.check(adjacentX, adjacentY)) {
+            if (Boolean.TRUE.equals(insideBoardCheckService.check(adjacentX, adjacentY))) {
 
                 Cell adjacentCell = cells[adjacentX][adjacentY];
-
-                // những ô cờ bị lật
-                List<Cell> flipCells = new ArrayList<>();
 
                 // nếu ô cờ là của đối thủ
                 if (Objects.nonNull(adjacentCell.getPiece()) &&
@@ -50,7 +50,7 @@ public class IsValidMovesService {
                     int y = adjacentY + direction.getY();
 
                     // Kiểm tra trên đường thẳng/ chéo nối từ ô hiện tại tới ô có quân cờ của người chơi hiện tại
-                    while (insideBoardCheckService.check(x, y)) {
+                    while (Boolean.TRUE.equals(insideBoardCheckService.check(x, y))) {
                         Cell currentCell = cells[x][y];
                         // Nếu ô hiện tại không có quân cờ
                         if (currentCell.getPiece().equals(Player.EMPTY)) {
