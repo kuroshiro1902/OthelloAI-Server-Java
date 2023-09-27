@@ -26,6 +26,9 @@ public class IsValidMovesService {
             return null;
         }
 
+        // những ô cờ bị lật
+        List<Cell> flipCells = new ArrayList<>();
+
         // duyệt qua các ô lân cận
         for (Direction direction : Direction.values()) {
             int adjacentX = row + direction.getX();
@@ -35,9 +38,6 @@ public class IsValidMovesService {
             if (Boolean.TRUE.equals(insideBoardCheckService.check(adjacentX, adjacentY))) {
 
                 Cell adjacentCell = cells[adjacentX][adjacentY];
-
-                // những ô cờ bị lật
-                List<Cell> flipCells = new ArrayList<>();
 
                 // nếu ô cờ là của đối thủ
                 if (Objects.nonNull(adjacentCell.getPiece()) &&
