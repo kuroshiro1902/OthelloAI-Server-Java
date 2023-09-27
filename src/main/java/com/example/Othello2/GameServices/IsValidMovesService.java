@@ -19,15 +19,14 @@ public class IsValidMovesService {
 
     public Move isValidMoves(Cell[][] cells, int row, int col, Player player) {
 
-        Move validMove = null;
-
         // nếu ô đã có cờ
         if (!cells[row][col].getPiece().equals(Player.EMPTY)) {
             return null;
         }
-
+        //Những ô cờ bắt đầu
+        List<Cell> froms = new ArrayList<>();
         // những ô cờ bị lật
-        List<Cell> flipCells = new ArrayList<>();
+        List<Cell> flips = new ArrayList<>();
 
         // duyệt qua các ô lân cận
         for (Direction direction : Direction.values()) {
@@ -38,14 +37,13 @@ public class IsValidMovesService {
             if (Boolean.TRUE.equals(insideBoardCheckService.check(adjacentX, adjacentY))) {
 
                 Cell adjacentCell = cells[adjacentX][adjacentY];
-
+                List<Cell> _flipCells = new ArrayList<>();
                 // nếu ô cờ là của đối thủ
                 if (Objects.nonNull(adjacentCell.getPiece()) &&
                         !Player.EMPTY.equals(adjacentCell.getPiece()) &&
                         !player.equals(adjacentCell.getPiece())){
 
-                    boolean foundPlayerPiece = false;
-                    flipCells.add(adjacentCell);
+                    _flipCells.add(adjacentCell);
                     int x = adjacentX + direction.getX();
                     int y = adjacentY + direction.getY();
 
@@ -58,22 +56,23 @@ public class IsValidMovesService {
                         }
                         // Nếu ô hiện tại có quân cờ của người chơi hiện tại
                         if (currentCell.getPiece().equals(player)) {
-                            foundPlayerPiece = true;
-                            validMove = new Move(currentCell, cells[row][col], flipCells.toArray(new Cell[0]));
+                            froms.add(currentCell);
+                            flips.addAll(_flipCells);
                             break; // Đã tìm thấy quân cờ của người hiện tại, nước đi hợp lệ
                         }
                         // Nếu ô hiện tại có quân cờ của đối thủ
-                        flipCells.add(currentCell);
+                        _flipCells.add(currentCell);
                         x += direction.getX();
                         y += direction.getY();
-                    }
-                    if (foundPlayerPiece) {
-                        break;
                     }
                 }
             }
         }
-
-        return validMove;
+        if(!froms.isEmpty()){
+            return new Move(froms.toArray(new Cell[0]), cells[row][col], flips.toArray(new Cell[0]));
+        }
+        else{
+            return null;
+        }
     }
 }
