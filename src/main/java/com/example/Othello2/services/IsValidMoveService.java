@@ -32,7 +32,7 @@ public class IsValidMoveService {
             int adjacentY = col + direction.getY();
 
             // nếu tọa độ x, y nằm trong bàn cờ
-            if (insideBoardCheckService.check(adjacentX, adjacentY)) {
+            if (Boolean.TRUE.equals(insideBoardCheckService.check(adjacentX, adjacentY))) {
 
                 Cell adjacentCell = cells[adjacentX][adjacentY];
 
@@ -50,7 +50,7 @@ public class IsValidMoveService {
                     int y = adjacentY + direction.getY();
 
                     // Kiểm tra trên đường thẳng/ chéo nối từ ô hiện tại tới ô có quân cờ của người chơi hiện tại
-                    while (insideBoardCheckService.check(x, y)) {
+                    while (Boolean.TRUE.equals(insideBoardCheckService.check(x, y))) {
                         Cell currentCell = cells[x][y];
                         // Nếu ô hiện tại không có quân cờ
                         if (currentCell.getDisc().equals(Player.EMPTY)) {
