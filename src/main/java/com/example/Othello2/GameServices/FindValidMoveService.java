@@ -1,4 +1,4 @@
-package com.example.Othello2.services;
+package com.example.Othello2.GameServices;
 
 import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FindValidMoveService {
 
-    private final IsValidMoveService isValidMoveService;
+    private final IsValidMovesService isValidMovesService;
 
     public List<Move> findValidMoves(Cell[][] cells, Player player) {
 
@@ -21,7 +21,7 @@ public class FindValidMoveService {
 
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
-                Move move = isValidMoveService.isValidMove(cells, i, j, player);
+                Move move = isValidMovesService.isValidMoves(cells, i, j, player);
                 if (move != null) {
                     moves.add(move);
                 }

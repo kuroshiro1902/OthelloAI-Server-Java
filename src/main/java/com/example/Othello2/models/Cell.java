@@ -15,11 +15,7 @@ import java.util.List;
 public class Cell {
     private int x;
     private int y;
-    private Player disc;
-
-    public Coordinates getCoordinates(){
-        return new Coordinates(x, y);
-    }
+    private Player piece;
 
     public static class CellListConvertToArray{
         public static Cell[][] convert(List<Cell> cells, Integer size){

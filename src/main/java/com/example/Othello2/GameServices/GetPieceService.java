@@ -1,4 +1,4 @@
-package com.example.Othello2.services;
+package com.example.Othello2.GameServices;
 
 import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GetDiscService {
-    public List<Cell> getAllDiscsOfThisPlayer(Cell[][] cells, Player player){
+public class GetPieceService {
+    public List<Cell> getAllPiecesOfThisPlayer(Cell[][] cells, Player player){
         List<Cell> result = new ArrayList<>();
         for ( Cell[] row : cells ){
             for (Cell cell : row){
-                if (player == cell.getDisc()){
+                if (player == cell.getPiece()){
                     result.add(cell);
                 }
             }

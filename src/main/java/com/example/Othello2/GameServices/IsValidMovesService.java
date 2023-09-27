@@ -1,4 +1,4 @@
-package com.example.Othello2.services;
+package com.example.Othello2.GameServices;
 
 import com.example.Othello2.common.enums.Direction;
 import com.example.Othello2.common.enums.Player;
@@ -13,16 +13,16 @@ import java.util.Objects;
 
 @Service
 @AllArgsConstructor
-public class IsValidMoveService {
+public class IsValidMovesService {
 
     private final InsideBoardCheckService insideBoardCheckService;
 
-    public Move isValidMove(Cell[][] cells, int row, int col, Player player) {
+    public Move isValidMoves(Cell[][] cells, int row, int col, Player player) {
 
         Move validMove = null;
 
         // nếu ô đã có cờ
-        if (!cells[row][col].getDisc().equals(Player.EMPTY)) {
+        if (!cells[row][col].getPiece().equals(Player.EMPTY)) {
             return null;
         }
 
@@ -40,11 +40,11 @@ public class IsValidMoveService {
                 List<Cell> flipCells = new ArrayList<>();
 
                 // nếu ô cờ là của đối thủ
-                if (Objects.nonNull(adjacentCell.getDisc()) &&
-                        !Player.EMPTY.equals(adjacentCell.getDisc()) &&
-                        !player.equals(adjacentCell.getDisc())){
+                if (Objects.nonNull(adjacentCell.getPiece()) &&
+                        !Player.EMPTY.equals(adjacentCell.getPiece()) &&
+                        !player.equals(adjacentCell.getPiece())){
 
-                    boolean foundPlayerDisc = false;
+                    boolean foundPlayerPiece = false;
                     flipCells.add(adjacentCell);
                     int x = adjacentX + direction.getX();
                     int y = adjacentY + direction.getY();
@@ -53,12 +53,12 @@ public class IsValidMoveService {
                     while (Boolean.TRUE.equals(insideBoardCheckService.check(x, y))) {
                         Cell currentCell = cells[x][y];
                         // Nếu ô hiện tại không có quân cờ
-                        if (currentCell.getDisc().equals(Player.EMPTY)) {
+                        if (currentCell.getPiece().equals(Player.EMPTY)) {
                             break;
                         }
                         // Nếu ô hiện tại có quân cờ của người chơi hiện tại
-                        if (currentCell.getDisc().equals(player)) {
-                            foundPlayerDisc = true;
+                        if (currentCell.getPiece().equals(player)) {
+                            foundPlayerPiece = true;
                             validMove = new Move(currentCell, cells[row][col], flipCells.toArray(new Cell[0]));
                             break; // Đã tìm thấy quân cờ của người hiện tại, nước đi hợp lệ
                         }
@@ -67,7 +67,7 @@ public class IsValidMoveService {
                         x += direction.getX();
                         y += direction.getY();
                     }
-                    if (foundPlayerDisc) {
+                    if (foundPlayerPiece) {
                         break;
                     }
                 }
