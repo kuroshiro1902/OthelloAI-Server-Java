@@ -42,6 +42,4 @@ public class Controller {
     List<Move> findValidMoves(@RequestBody FindValidMoveRequest request){
         return findValidMoveService.findValidMoves(request.getCells(), Player.valueOf(request.getPlayer()));
     }
-
-
 }
