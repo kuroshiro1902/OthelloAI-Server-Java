@@ -6,6 +6,8 @@ import com.example.Othello2.models.Move;
 import com.example.Othello2.GameServices.*;
 import com.example.Othello2.models.request.DynamicEvaluationRequest;
 import com.example.Othello2.models.request.FindValidMoveRequest;
+import com.example.Othello2.models.request.MoveRequest;
+import com.example.Othello2.models.response.GameStats;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ public class Controller {
     private final IsValidMovesService isValidMovesService;
     private final DynamicEvaluationService dynamicEvaluationService;
     private final FindValidMoveService findValidMoveService;
-
+    private final MoveService moveService;
     @PostMapping("/dynamic-evaluation")
     @Operation(summary = "Đánh giá lợi thế")
     public Double dynamicEvaluation(@RequestBody DynamicEvaluationRequest request){
@@ -32,14 +34,19 @@ public class Controller {
                 request.getValidMovesForPlayer());
     }
 
-    @GetMapping("/initialize")
+    @PostMapping("/initialize")
     @Operation(summary = "Khởi tạo bàn cờ")
-    public Cell[][] initializeChessBoard(){
-        return initializeChessBoardService.initialize();
+    public GameStats initializeChessBoard(@RequestBody MoveRequest request){
+        return initializeChessBoardService.initialize(request.getCurrentPlayer());
     }
 
     @PostMapping("/find-valid-move")
     List<Move> findValidMoves(@RequestBody FindValidMoveRequest request){
         return findValidMoveService.findValidMoves(request.getCells(), Player.valueOf(request.getPlayer()));
+    }
+
+    @PostMapping ("/move")
+    GameStats move(@RequestBody MoveRequest request){
+        return moveService.move(request.getCells(),request.getCurrentPlayer(),request.getMove());
     }
 }

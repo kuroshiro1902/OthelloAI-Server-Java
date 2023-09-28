@@ -14,10 +14,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties
-public class BoardStats {
-    private Cell[][] newCells;
-    private Player newCurrentPlayer;
-    private Move[] newValidMoves;
+public class GameStats {
+    private Cell[][] cells;
+    private Player currentPlayer;
+    private Move[] validMoves;
     private double EvaluationValue;
 
 }
