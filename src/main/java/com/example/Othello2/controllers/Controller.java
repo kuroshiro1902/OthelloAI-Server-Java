@@ -54,6 +54,6 @@ public class Controller {
 
     @PostMapping("/checkwin")
     Player checkwin(@RequestBody CheckWinRequest request){
-        return checkWinService.checkWinOfPlayer(request.getCells(),request.getCurrentPlayerStats(),request.getOpponentPlayerStats());
+        return checkWinService.checkWinOfPlayer(request.getCells(),request.getCurrentPlayer());
     }
 }
