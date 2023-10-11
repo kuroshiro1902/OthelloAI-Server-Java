@@ -4,6 +4,7 @@ import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
 import com.example.Othello2.models.Move;
 import com.example.Othello2.GameServices.*;
+import com.example.Othello2.models.request.CheckWinRequest;
 import com.example.Othello2.models.request.DynamicEvaluationRequest;
 import com.example.Othello2.models.request.FindValidMoveRequest;
 import com.example.Othello2.models.request.MoveRequest;
@@ -26,6 +27,7 @@ public class Controller {
     private final DynamicEvaluationService dynamicEvaluationService;
     private final FindValidMoveService findValidMoveService;
     private final MoveService moveService;
+    private final CheckWinService checkWinService;
     @PostMapping("/dynamic-evaluation")
     @Operation(summary = "Đánh giá lợi thế")
     public Double dynamicEvaluation(@RequestBody DynamicEvaluationRequest request){
@@ -48,5 +50,10 @@ public class Controller {
     @PostMapping ("/move")
     GameStats move(@RequestBody MoveRequest request){
         return moveService.move(request.getCells(),request.getCurrentPlayer(),request.getMove());
+    }
+
+    @PostMapping("/checkwin")
+    Player checkwin(@RequestBody CheckWinRequest request){
+        return checkWinService.checkWinOfPlayer(request.getCells(),request.getCurrentPlayer());
     }
 }
