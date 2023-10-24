@@ -16,17 +16,23 @@ import java.util.List;
 public class MiniMaxService {
     private final FindValidMoveService findvalidmoveService;
     private final MoveService moveService;
+    private final DynamicEvaluationService dynamicEvaluationService;
     private Cell[][] copyCells(Cell[][] cells) {
         Cell[][] copy = new Cell[cells.length][cells[0].length];
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
                 // Implement clone logic for ICell (if available)
-                // copy[i][j] = cells[i][j].clone();
+                copy[i][j] = new Cell(cells[i][j].getX(),cells[i][j].getY(),cells[i][j].getPiece());
             }
         }
         return copy;
     }
-    public MinimaxResult minimax(Cell[][] cells, int depth, boolean isMaximizingPlayer, double evaluationValue, Player player) {
+
+    public MinimaxResult minimax(Cell[][] cells,
+                                 int depth,
+                                 boolean isMaximizingPlayer,
+                                 double evaluationValue,
+                                 Player player) {
         List<Move> validMoves = findvalidmoveService.findValidMoves(cells, player);
 
         // Sort moves randomly
@@ -46,8 +52,21 @@ public class MiniMaxService {
             GameStats newGameStatsAfterCurrMove = moveService.move(copyCells(cells), player, currMove);
 
             // Dynamic evaluation and other necessary processing
-            DynamicEvaluationResult evaluationResult = GameController.dynamicEvaluation(newGameStatsAfterCurrMove, newGameStatsAfterCurrMove.getCurrentPlayer(), newGameStatsAfterCurrMove.getValidMoves());
-            double childEvaluationValue = evaluationResult.getEvaluationValue();
+            EvaluationRes evaluationResult = dynamicEvaluationService.dynamicEvaluation(
+                                                        newGameStatsAfterCurrMove.getCells(),
+                                                        newGameStatsAfterCurrMove.getCurrentPlayer(),
+                                                        newGameStatsAfterCurrMove.getValidMoves());
+
+            // Gọi đệ quy với Minimax
+            MinimaxResult childResult = minimax(
+                    copyCells(newGameStatsAfterCurrMove.getCells()),
+                    depth - 1,
+                    !isMaximizingPlayer,
+                    evaluationResult.getCurrentAdvantage(),
+                    newGameStatsAfterCurrMove.getCurrentPlayer()
+            );
+
+            double childEvaluationValue = childResult.getEvaluationValue();
 
             if (isMaximizingPlayer) {
                 if (childEvaluationValue > maxValue) {
