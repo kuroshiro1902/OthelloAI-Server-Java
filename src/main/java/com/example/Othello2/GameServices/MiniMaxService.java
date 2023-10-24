@@ -17,16 +17,6 @@ public class MiniMaxService {
     private final FindValidMoveService findvalidmoveService;
     private final MoveService moveService;
     private final DynamicEvaluationService dynamicEvaluationService;
-    private Cell[][] copyCells(Cell[][] cells) {
-        Cell[][] copy = new Cell[cells.length][cells[0].length];
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                // Implement clone logic for ICell (if available)
-                copy[i][j] = new Cell(cells[i][j].getX(),cells[i][j].getY(),cells[i][j].getPiece());
-            }
-        }
-        return copy;
-    }
 
     public MinimaxResult minimax(Cell[][] cells,
                                  int depth,
@@ -49,7 +39,7 @@ public class MiniMaxService {
 
         for (Move validMove : validMoves) {
             currMove = validMove;
-            GameStats newGameStatsAfterCurrMove = moveService.move(copyCells(cells), player, currMove);
+            GameStats newGameStatsAfterCurrMove = moveService.move(cells, player, currMove);
 
             // Dynamic evaluation and other necessary processing
             EvaluationRes evaluationResult = dynamicEvaluationService.dynamicEvaluation(
@@ -59,7 +49,7 @@ public class MiniMaxService {
 
             // Gọi đệ quy với Minimax
             MinimaxResult childResult = minimax(
-                    copyCells(newGameStatsAfterCurrMove.getCells()),
+                    newGameStatsAfterCurrMove.getCells(),
                     depth - 1,
                     !isMaximizingPlayer,
                     evaluationResult.getCurrentAdvantage(),
