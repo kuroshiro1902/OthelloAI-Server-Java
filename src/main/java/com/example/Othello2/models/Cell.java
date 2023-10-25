@@ -15,7 +15,15 @@ import java.util.List;
 public class Cell {
     private int x;
     private int y;
-    private Player piece;
+    public Player piece;
+
+
+    public static int getX() {
+    }
+
+    public static int getY() {
+    }
+}
 
     public static class CellListConvertToArray{
         public static Cell[][] convert(List<Cell> cells, Integer size){

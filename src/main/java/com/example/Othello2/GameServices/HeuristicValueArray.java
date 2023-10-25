@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class HeuristicValueArray {
 
-    public Integer[][] heuristicValueArray(){
+    public static Integer[][] heuristicValueArray(){
         Integer[][] board = {
                 {20, -3, 11, 8, 8, 11, -3, 20},
                 {-3, -7, -4, 1, 1, -4, -7, -3},

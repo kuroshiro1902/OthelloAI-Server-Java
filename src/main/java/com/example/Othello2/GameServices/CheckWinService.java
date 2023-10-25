@@ -12,9 +12,9 @@ import com.example.Othello2.utils.*;
 @Service
 @AllArgsConstructor
 public class CheckWinService {
-    private final FindValidMoveService findValidMoveService;
-    private Utils utils;
-    public Player checkWinOfPlayer(Cell[][] cells, Player currentPlayer){
+    private static final FindValidMoveService findValidMoveService;
+    private static Utils utils;
+    public static Player checkWinOfPlayer(Cell[][] cells, Player currentPlayer){
             // so sánh số quân cờ
            Player opponentPlayer = utils.enemyOf(currentPlayer);
            int countPiecePlayer = 0,countPieceOppenents = 0;// khởi tạo số quân cờ
