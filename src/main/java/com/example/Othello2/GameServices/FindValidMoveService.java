@@ -15,7 +15,7 @@ public class FindValidMoveService {
 
     private final IsValidMovesService isValidMovesService;
 
-    public List<Move> findValidMoves(Cell[][] cells, Player player) {
+    public static List<Move> findValidMoves(Cell[][] cells, Player player) {
 
         List<Move> moves = new ArrayList<>();
 
