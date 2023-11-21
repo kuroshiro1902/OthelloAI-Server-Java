@@ -7,6 +7,9 @@ import com.example.Othello2.models.response.GameStats;
 import com.example.Othello2.utils.Utils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class MoveService {
@@ -24,7 +27,8 @@ public class MoveService {
         else{
             newCurrentPlayer = currentPlayer;
         }
-        Move[] newValidMoves = findValidMoveService.findValidMoves(cells, newCurrentPlayer).toArray(new Move[0]);
+
+        List<Move> newValidMoves = findValidMoveService.findValidMoves(cells, newCurrentPlayer);
         return new GameStats(cells, newCurrentPlayer, newValidMoves, 0);
     }
 }

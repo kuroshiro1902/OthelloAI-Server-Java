@@ -2,6 +2,7 @@ package com.example.Othello2.GameServices;
 
 import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
+import com.example.Othello2.models.EvaluationRes;
 import com.example.Othello2.models.MinimaxResult;
 import com.example.Othello2.models.Move;
 import com.example.Othello2.models.response.GameStats;
