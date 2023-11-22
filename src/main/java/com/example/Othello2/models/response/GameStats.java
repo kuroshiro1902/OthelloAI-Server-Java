@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,7 +19,6 @@ import lombok.Setter;
 public class GameStats {
     private Cell[][] cells;
     private Player currentPlayer;
-    private Move[] validMoves;
+    private List<Move> validMoves;
     private double EvaluationValue;
-
 }
