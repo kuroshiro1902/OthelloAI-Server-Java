@@ -1,0 +1,85 @@
+package com.example.Othello2.AiServices;
+
+import com.example.Othello2.GameServices.DynamicEvaluationService;
+import com.example.Othello2.GameServices.FindValidMoveService;
+import com.example.Othello2.GameServices.MoveService;
+import com.example.Othello2.common.enums.Player;
+import com.example.Othello2.models.Cell;
+import com.example.Othello2.models.EvaluationRes;
+import com.example.Othello2.models.MinimaxResult;
+import com.example.Othello2.models.Move;
+import com.example.Othello2.models.response.GameStats;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+
+@AllArgsConstructor
+@Service
+public class MinimaxService {
+    private final FindValidMoveService findValidMoveService;
+    private final MoveService moveService;
+    private DynamicEvaluationService dynamicEvaluationService;
+    public MinimaxResult minimaxV1(Cell[][] cells, int depth, boolean isMaximizingPlayer, double evaluationValue, Player player){
+        //generate game tree
+        List<Move> validMoves = this.findValidMoveService.findValidMoves(cells, player);
+        //sort moves randomly
+        Collections.shuffle(validMoves);
+
+        Move currMove;
+
+        // Maximum depth exceeded or node is a terminal node (no children)
+        if(depth == 0 || validMoves.size() == 0){
+            return new MinimaxResult(null, evaluationValue);
+        }
+
+        /*
+        Find maximum/minimum from list of validMoves
+        */
+        double maxValue = Double.NEGATIVE_INFINITY;
+        double minValue = Double.POSITIVE_INFINITY;
+        Move bestMove = null;
+
+        for (Move validMove : validMoves) {
+            currMove = validMove;
+
+            //move currMove
+            GameStats newGameStatsAfterCurrMove = moveService.move(cells.clone(), player, currMove);
+
+            //evaluate currMove
+            EvaluationRes evaluationRes = this.dynamicEvaluationService.dynamicEvaluation(newGameStatsAfterCurrMove.getCells(), newGameStatsAfterCurrMove.getCurrentPlayer(), newGameStatsAfterCurrMove.getValidMoves());
+            double newEvaluationValue = evaluationRes.getCurrentAdvantage();
+
+            //minimax recursion
+            MinimaxResult childMinimaxResult = this.minimaxV1(newGameStatsAfterCurrMove.getCells().clone(), depth-1, !isMaximizingPlayer, newEvaluationValue, newGameStatsAfterCurrMove.getCurrentPlayer() );
+            double childEvaluationValue = childMinimaxResult.getEvaluationValue();
+            if(isMaximizingPlayer){
+                if(childEvaluationValue > maxValue){
+                    maxValue = childEvaluationValue;
+                    bestMove = currMove;
+                }
+                /*cut off Alpha-beta
+                ...
+                */
+            }
+            else{
+                if(childEvaluationValue<minValue){
+                    minValue = childEvaluationValue;
+                    bestMove = currMove;
+                }
+                /*cut off Alpha-beta
+                ...
+                */
+            }
+        }
+
+        //return
+        if(isMaximizingPlayer){
+            return new MinimaxResult(bestMove, maxValue);
+        }
+        else{
+            return new MinimaxResult(bestMove, minValue);
+        }
+    }
+}

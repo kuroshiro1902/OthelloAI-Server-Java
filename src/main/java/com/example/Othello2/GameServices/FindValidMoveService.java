@@ -1,5 +1,6 @@
 package com.example.Othello2.GameServices;
 
+import com.example.Othello2.GameServices.helpers.IsValidMovesService;
 import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
 import com.example.Othello2.models.Move;
