@@ -44,7 +44,7 @@ public class DynamicEvaluationService {
 
                 }
                 //opponent Player
-                else{
+                else if(cell.getPiece() == opponentPlayer){
                     opponentPlayerStats.getPieces().add(cell);
                     if(_edgeOrCorner.equals("corner")){
                         opponentPlayerStats.setCornerPiecesAmount(opponentPlayerStats.getCornerPiecesAmount() + 1);
@@ -65,25 +65,31 @@ public class DynamicEvaluationService {
         }
         opponentPlayerStats.setValidMovesAmount(findValidMoveService.findValidMoves(cells, opponentPlayer).size());
 
-        //check win
+        //check win and evaluate
         Player winner = findWinnerService.findWinner(currentPlayerStats, opponentPlayerStats);
-        double winValue = Math.pow(10,7);
+        double winValue = Math.pow(10,7)/2;
+
         if(winner.equals(currentPlayerStats.getPlayer())){
             currentPlayerStats.setEvaluationValue(winValue);
             opponentPlayerStats.setEvaluationValue(-winValue);
         }
-        else{
+        else if(winner.equals(this.utils.enemyOf(currentPlayerStats.getPlayer()))){
             currentPlayerStats.setEvaluationValue(-winValue);
             opponentPlayerStats.setEvaluationValue(winValue);
         }
+        else if(winner.equals(Player.BOTH)){
+            currentPlayerStats.setEvaluationValue(0);
+            opponentPlayerStats.setEvaluationValue(0);
+        }
+        else{
+            currentPlayerStats.evaluate();
+            opponentPlayerStats.evaluate();
+        }
 
-        //evaluate
-        currentPlayerStats.evaluate();
-        opponentPlayerStats.evaluate();
         return new EvaluationRes(currentPlayerStats, opponentPlayerStats, currentPlayerStats.getEvaluationValue() - opponentPlayerStats.getEvaluationValue(), winner);
     }
 
-    private String isEdgeOrCorner(Cell cell){ //return: "edge | "corner" | null
+    private String isEdgeOrCorner(Cell cell){ //return: "edge | "corner" | "none"
         int x = cell.getX();
         int y = cell.getY();
         boolean isXEdge = (x == 0 || x == 8 - 1); //8: Độ lớn của bảng

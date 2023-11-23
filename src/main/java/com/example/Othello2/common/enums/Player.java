@@ -1,9 +1,11 @@
 package com.example.Othello2.common.enums;
 
 public enum Player {
-    EMPTY("EMPTY"),
+    EMPTY("EMPTY"), //Rỗng | Không ai win
     WHITE("WHITE"),
-    BLACK("BLACK");
+    BLACK("BLACK"),
+
+    BOTH("BOTH"); //Hòa
 
     private final String value;
 

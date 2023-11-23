@@ -22,6 +22,9 @@ public class GameStats {
     private Player currentPlayer;
     private List<Move> validMoves;
     private double evaluationValue = 0;
+
+    private boolean isEnd = false;
+    private Player winner = Player.EMPTY;
     private PlayerStats currentPlayerStats = new PlayerStats();
     private PlayerStats opponentPlayerStats = new PlayerStats();
 
