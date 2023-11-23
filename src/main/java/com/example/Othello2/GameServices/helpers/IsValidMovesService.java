@@ -1,4 +1,4 @@
-package com.example.Othello2.GameServices;
+package com.example.Othello2.GameServices.helpers;
 
 import com.example.Othello2.common.enums.Direction;
 import com.example.Othello2.common.enums.Player;
@@ -15,7 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class IsValidMovesService {
 
-    private final InsideBoardCheckService insideBoardCheckService;
+    private final IsInsideBoardService isInsideBoardService;
 
     public Move isValidMoves(Cell[][] cells, int row, int col, Player player) {
 
@@ -34,7 +34,7 @@ public class IsValidMovesService {
             int adjacentY = col + direction.getY();
 
             // nếu tọa độ x, y nằm trong bàn cờ
-            if (Boolean.TRUE.equals(insideBoardCheckService.check(adjacentX, adjacentY))) {
+            if (Boolean.TRUE.equals(isInsideBoardService.check(adjacentX, adjacentY))) {
 
                 Cell adjacentCell = cells[adjacentX][adjacentY];
                 List<Cell> _flipCells = new ArrayList<>();
@@ -48,7 +48,7 @@ public class IsValidMovesService {
                     int y = adjacentY + direction.getY();
 
                     // Kiểm tra trên đường thẳng/ chéo nối từ ô hiện tại tới ô có quân cờ của người chơi hiện tại
-                    while (Boolean.TRUE.equals(insideBoardCheckService.check(x, y))) {
+                    while (Boolean.TRUE.equals(isInsideBoardService.check(x, y))) {
                         Cell currentCell = cells[x][y];
                         // Nếu ô hiện tại không có quân cờ
                         if (currentCell.getPiece().equals(Player.EMPTY)) {
@@ -69,7 +69,7 @@ public class IsValidMovesService {
             }
         }
         if(!froms.isEmpty()){
-            return new Move(froms.toArray(new Cell[0]), cells[row][col], flips.toArray(new Cell[0]));
+            return new Move(List.of(froms.toArray(new Cell[0])), cells[row][col], List.of(flips.toArray(new Cell[0])));
         }
         else{
             return null;

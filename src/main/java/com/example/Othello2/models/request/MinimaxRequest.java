@@ -1,5 +1,6 @@
 package com.example.Othello2.models.request;
 
+import com.example.Othello2.common.enums.Player;
 import com.example.Othello2.models.Cell;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -12,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties
-public class IsValidMovesRequest {
-    private Integer row;
-    private Integer col;
-    private String player;
+public class MinimaxRequest {
     private Cell[][] cells;
+    private int depth;
+    private double evaluationValue;
+    private Player currentPlayer;
 }

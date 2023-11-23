@@ -5,14 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class Move {
-    private List<Cell> froms;
-    private Cell to;
-    private List<Cell> flips;
+public class MinimaxResult {
+    private Move bestMove;
+    private double evaluationValue;
 }

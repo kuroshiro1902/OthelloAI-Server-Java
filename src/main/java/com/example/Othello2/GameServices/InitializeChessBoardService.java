@@ -6,6 +6,9 @@ import com.example.Othello2.models.Move;
 import com.example.Othello2.models.response.GameStats;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class InitializeChessBoardService {
@@ -27,6 +30,6 @@ public class InitializeChessBoardService {
         cells[centerIndex + 1][centerIndex + 1].setPiece(Player.WHITE);
 
         Move[] validMoves = findValidMoveService.findValidMoves(cells,firstPlayer).toArray(new Move[0]);
-        return new GameStats(cells, firstPlayer, validMoves,0 );
+        return new GameStats(cells, firstPlayer, List.of(validMoves),0 );
     }
 }
