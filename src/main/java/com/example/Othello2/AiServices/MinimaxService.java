@@ -52,7 +52,7 @@ public class MinimaxService {
             double newEvaluationValue = evaluationRes.getCurrentAdvantage();
 
             //minimax recursion
-            MinimaxResult childMinimaxResult = this.minimaxV1(newGameStatsAfterCurrMove.getCells().clone(), depth-1, !isMaximizingPlayer, newEvaluationValue, newGameStatsAfterCurrMove.getCurrentPlayer() );
+            MinimaxResult childMinimaxResult = this.minimaxV1(this.clone2DArray(newGameStatsAfterCurrMove.getCells()), depth-1, !isMaximizingPlayer, newEvaluationValue, newGameStatsAfterCurrMove.getCurrentPlayer() );
             double childEvaluationValue = childMinimaxResult.getEvaluationValue();
             if(isMaximizingPlayer){
                 if(childEvaluationValue > maxValue){
@@ -81,5 +81,16 @@ public class MinimaxService {
         else{
             return new MinimaxResult(bestMove, minValue);
         }
+    }
+    public Cell[][] clone2DArray(Cell[][] original) {
+        int length = original.length;
+        Cell[][] copy = new Cell[length][];
+        for (int i = 0; i < length; i++) {
+            Cell[] aMatrix = original[i];
+            int aLength = aMatrix.length;
+            copy[i] = new Cell[aLength];
+            System.arraycopy(aMatrix, 0, copy[i], 0, aLength);
+        }
+        return copy;
     }
 }
