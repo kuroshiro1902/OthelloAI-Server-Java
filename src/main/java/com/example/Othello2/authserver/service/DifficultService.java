@@ -58,13 +58,19 @@ public class DifficultService {
         );
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(2)
+                        .amount(3)
                         .userId(userId)
                         .build()
         );
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(3)
+                        .amount(5)
+                        .userId(userId)
+                        .build()
+        );
+        difficultEntities.add(
+                DifficultEntity.builder()
+                        .amount(7)
                         .userId(userId)
                         .build()
         );
