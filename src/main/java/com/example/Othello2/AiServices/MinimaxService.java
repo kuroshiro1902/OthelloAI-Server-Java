@@ -1,14 +1,14 @@
 package com.example.Othello2.AiServices;
 
-import com.example.Othello2.GameServices.DynamicEvaluationService;
-import com.example.Othello2.GameServices.FindValidMoveService;
-import com.example.Othello2.GameServices.MoveService;
-import com.example.Othello2.common.enums.Player;
-import com.example.Othello2.models.Cell;
-import com.example.Othello2.models.EvaluationRes;
-import com.example.Othello2.models.MinimaxResult;
-import com.example.Othello2.models.Move;
-import com.example.Othello2.models.response.GameStats;
+import com.example.Othello2.gameserver.GameServices.DynamicEvaluationService;
+import com.example.Othello2.gameserver.GameServices.FindValidMoveService;
+import com.example.Othello2.gameserver.GameServices.MoveService;
+import com.example.Othello2.gameserver.enums.Player;
+import com.example.Othello2.gameserver.models.Cell;
+import com.example.Othello2.gameserver.models.EvaluationRes;
+import com.example.Othello2.gameserver.models.MinimaxResult;
+import com.example.Othello2.gameserver.models.Move;
+import com.example.Othello2.gameserver.models.response.GameStats;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
