@@ -1,11 +1,14 @@
 package com.example.Othello2.AiServices;
 
-import com.example.Othello2.GameServices.DynamicEvaluationService;
-import com.example.Othello2.GameServices.FindValidMoveService;
-import com.example.Othello2.GameServices.MoveService;
-import com.example.Othello2.common.enums.Player;
-import com.example.Othello2.models.*;
-import com.example.Othello2.models.response.GameStats;
+import com.example.Othello2.gameserver.GameServices.DynamicEvaluationService;
+import com.example.Othello2.gameserver.GameServices.FindValidMoveService;
+import com.example.Othello2.gameserver.GameServices.MoveService;
+import com.example.Othello2.gameserver.enums.Player;
+import com.example.Othello2.gameserver.models.Cell;
+import com.example.Othello2.gameserver.models.EvaluationRes;
+import com.example.Othello2.gameserver.models.MinimaxResult;
+import com.example.Othello2.gameserver.models.Move;
+import com.example.Othello2.gameserver.models.response.GameStats;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,14 @@ public class MinimaxService {
     private final MoveService moveService;
     private DynamicEvaluationService dynamicEvaluationService;
 
-    public MinimaxResult minimaxV2(Cell[][] cells, int depth, boolean isMaximizingPlayer, double evaluationValue, Player player, double alpha, double beta, PositionCount positionCount){
+    public MinimaxResult minimaxV2(Cell[][] cells,
+                                   int depth,
+                                   boolean isMaximizingPlayer,
+                                   double evaluationValue,
+                                   Player player,
+                                   double alpha,
+                                   double beta,
+                                   com.example.Othello2.models.PositionCount positionCount){
         positionCount.value++;
 
         //generate game tree

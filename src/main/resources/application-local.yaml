@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/othello_difficult
+    username: postgres
+    password: 101119
+    driver-class-name: org.postgresql.Driver
+#datasource:
+#  url: jdbc:mysql://localhost:3306/microservice_product
+#  username: your_mysql_username
+#  password: your_mysql_password
+#  driver-class-name: com.mysql.cj.jdbc.Driver
+
+#  CREATE TABLE tbl_users(
+#  id	SERIAL PRIMARY KEY,
+#  username VARCHAR,
+#  password VARCHAR
+#  );
+#
+#  CREATE TABLE tbl_difficults(
+#  id	SERIAL PRIMARY KEY,
+#  amount INTEGER,
+#  user_id BIGINT REFERENCES tbl_users(id)
+#  )
