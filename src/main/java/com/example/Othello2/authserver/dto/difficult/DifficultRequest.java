@@ -10,5 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DifficultRequest {
-    private Integer amount;
+    private Integer depth;
 }

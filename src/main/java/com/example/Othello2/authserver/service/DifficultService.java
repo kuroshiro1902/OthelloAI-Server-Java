@@ -23,7 +23,7 @@ public class DifficultService {
     public List<DifficultResponse> getList(Long userId){
         return difficultRepository.findAllByUserId(userId).stream()
                 .map(DifficultMapper::getResponseFromEntity)
-                .sorted(Comparator.comparing(DifficultResponse::getAmount))
+                .sorted(Comparator.comparing(DifficultResponse::getDepth))
                 .collect(Collectors.toList());
     }
 
@@ -32,6 +32,7 @@ public class DifficultService {
         difficultRepository.deleteAllByUserId(userId);
         List<DifficultEntity> difficultEntities = requestList.stream()
                 .map(DifficultMapper::getEntityFromInput)
+                .sorted(Comparator.comparing(DifficultEntity::getDepth))
                 .collect(Collectors.toList());
 
         for (DifficultEntity difficultEntity : difficultEntities){
@@ -42,7 +43,7 @@ public class DifficultService {
 
         return difficultEntities.stream()
                 .map(DifficultMapper::getResponseFromEntity)
-                .sorted(Comparator.comparing(DifficultResponse::getAmount))
+                .sorted(Comparator.comparing(DifficultResponse::getDepth))
                 .collect(Collectors.toList());
     }
 
@@ -52,32 +53,32 @@ public class DifficultService {
         List<DifficultEntity> difficultEntities = new ArrayList<>();
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(1)
+                        .depth(1)
                         .userId(userId)
                         .build()
         );
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(3)
+                        .depth(3)
                         .userId(userId)
                         .build()
         );
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(5)
+                        .depth(5)
                         .userId(userId)
                         .build()
         );
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(7)
+                        .depth(7)
                         .userId(userId)
                         .build()
         );
         difficultRepository.saveAll(difficultEntities);
         return difficultEntities.stream()
                 .map(DifficultMapper::getResponseFromEntity)
-                .sorted(Comparator.comparing(DifficultResponse::getAmount))
+                .sorted(Comparator.comparing(DifficultResponse::getDepth))
                 .collect(Collectors.toList());
     }
 }

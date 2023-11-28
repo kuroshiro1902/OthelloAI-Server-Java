@@ -2,6 +2,7 @@ package com.example.Othello2.AiServices;
 
 import com.example.Othello2.gameserver.GameServices.DynamicEvaluationService;
 import com.example.Othello2.gameserver.GameServices.FindValidMoveService;
+import com.example.Othello2.models.PositionCount;
 import com.example.Othello2.gameserver.GameServices.MoveService;
 import com.example.Othello2.gameserver.enums.Player;
 import com.example.Othello2.gameserver.models.Cell;
@@ -29,7 +30,7 @@ public class MinimaxService {
                                    Player player,
                                    double alpha,
                                    double beta,
-                                   com.example.Othello2.models.PositionCount positionCount){
+                                   PositionCount positionCount){
         positionCount.value++;
 
         //generate game tree

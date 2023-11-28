@@ -17,7 +17,7 @@ public class DifficultEntity {
     private Long id;
 
     @Column(name = "amount")
-    private Integer amount;
+    private Integer depth;
 
     @Column(name = "user_id")
     private Long userId;

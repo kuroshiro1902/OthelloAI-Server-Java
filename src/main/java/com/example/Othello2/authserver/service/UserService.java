@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -31,25 +32,25 @@ public class UserService {
         List<DifficultEntity> difficultEntities = new ArrayList<>();
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(1)
+                        .depth(1)
                         .userId(userEntity.getId())
                         .build()
         );
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(3)
+                        .depth(3)
                         .userId(userEntity.getId())
                         .build()
         );
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(5)
+                        .depth(5)
                         .userId(userEntity.getId())
                         .build()
         );
         difficultEntities.add(
                 DifficultEntity.builder()
-                        .amount(7)
+                        .depth(7)
                         .userId(userEntity.getId())
                         .build()
         );
@@ -60,6 +61,9 @@ public class UserService {
 
     public String logIn(UserRequest logInRequest){
         UserEntity userEntity = userRepository.findByUsername(logInRequest.getUsername());
+        if (Objects.isNull(userEntity)){
+            throw new RuntimeException("Incorrect password!!!");
+        }
         String currentHashedPassword = userEntity.getPassword();
         if (BCrypt.checkpw(logInRequest.getPassword(), currentHashedPassword)){
             return TokenHandler.generateToken(userEntity);

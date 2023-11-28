@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DifficultResponse {
     private Long id;
-    private Integer amount;
+    private Integer depth;
 }

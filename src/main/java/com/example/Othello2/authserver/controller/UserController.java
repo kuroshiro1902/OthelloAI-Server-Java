@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/othello/user")
 @AllArgsConstructor
 @CrossOrigin
 public class UserController {
@@ -22,8 +22,8 @@ public class UserController {
 
     @Operation(summary = "Đăng ký tài khoản")
     @PostMapping("sign-up")
-    public String signUp(@RequestBody UserRequest signUpRequest){
-        return userService.signUp(signUpRequest);
+    public ResponseEntity signUp(@RequestBody UserRequest signUpRequest){
+        return new ResponseEntity(new TokenResponse(userService.signUp(signUpRequest)), HttpStatus.OK);
     }
 
     @Operation(summary = "Đăng nhập")

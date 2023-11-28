@@ -8,16 +8,12 @@ spring:
       hibernate:
         format_sql: true
 
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/othello_difficult
-    username: postgres
-    password: 101119
-    driver-class-name: org.postgresql.Driver
-#datasource:
-#  url: jdbc:mysql://localhost:3306/microservice_product
-#  username: your_mysql_username
-#  password: your_mysql_password
-#  driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/othello
+    username: admin
+    password: 123456789
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 #  CREATE TABLE tbl_users(
 #  id	SERIAL PRIMARY KEY,

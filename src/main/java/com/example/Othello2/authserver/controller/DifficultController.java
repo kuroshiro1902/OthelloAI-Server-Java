@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/difficult")
+@RequestMapping("/api/v1/othello/difficult")
 @AllArgsConstructor
 @CrossOrigin
 public class DifficultController {
