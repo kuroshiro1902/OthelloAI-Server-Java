@@ -12,7 +12,7 @@ import lombok.Setter;
 public class MinimaxResult {
     private Move bestMove;
     private double evaluationValue;
-    private PositionCount positionCount = new PositionCount(0);
+    private com.example.Othello2.models.PositionCount positionCount = new com.example.Othello2.models.PositionCount(0);
 
     public MinimaxResult(Move bestMove, double evaluationValue){
         this.bestMove = bestMove;

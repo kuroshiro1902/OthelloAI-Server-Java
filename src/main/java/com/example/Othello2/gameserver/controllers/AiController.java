@@ -15,7 +15,7 @@ public class AiController {
 
     @PostMapping("/minimax/v2")
     public MinimaxResult minimaxV2(@RequestBody MinimaxRequest request){
-        return this.minimaxService.minimaxV2(request.getCells(), request.getDepth(), true, request.getEvaluationValue(), request.getCurrentPlayer(), Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, new PositionCount(0));
+        return this.minimaxService.minimaxV2(request.getCells(), request.getDepth(), true, request.getEvaluationValue(), request.getCurrentPlayer(), Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, new com.example.Othello2.models.PositionCount(0));
     }
     @PostMapping("/minimax/v1")
     public MinimaxResult minimaxV1(@RequestBody MinimaxRequest request){
