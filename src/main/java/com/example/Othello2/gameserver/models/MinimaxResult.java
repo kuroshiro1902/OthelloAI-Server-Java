@@ -12,4 +12,10 @@ import lombok.Setter;
 public class MinimaxResult {
     private Move bestMove;
     private double evaluationValue;
+    private PositionCount positionCount = new PositionCount(0);
+
+    public MinimaxResult(Move bestMove, double evaluationValue){
+        this.bestMove = bestMove;
+        this.evaluationValue = evaluationValue;
+    }
 }

@@ -23,7 +23,6 @@ public class GameStats {
     private List<Move> validMoves;
     private double evaluationValue = 0;
 
-    private boolean isEnd = false;
     private Player winner = Player.EMPTY;
     private PlayerStats currentPlayerStats = new PlayerStats();
     private PlayerStats opponentPlayerStats = new PlayerStats();
@@ -33,5 +32,12 @@ public class GameStats {
         this.currentPlayer = currentPlayer;
         this.validMoves = validMoves;
         this.evaluationValue = evaluationValue;
+    }
+    public GameStats(Cell[][] cells, Player currentPlayer, List<Move> validMoves, double evaluationValue, Player winner){
+        this.cells = cells;
+        this.currentPlayer = currentPlayer;
+        this.validMoves = validMoves;
+        this.evaluationValue = evaluationValue;
+        this.winner =winner;
     }
 }
